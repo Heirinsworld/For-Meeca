@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Meeca 💌</title>
+
 <style>
 body {
   margin: 0;
@@ -12,54 +14,24 @@ body {
   align-items: center;
   background: linear-gradient(135deg, #ffd9e8, #fff0f6);
   font-family: Arial;
-  overflow: hidden;
-}
-
-/* INTRO POPUP */
-.intro {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 79, 129, 0.95);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  z-index: 10;
-}
-
-.intro button {
-  margin-top: 20px;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 20px;
-  background: white;
-  color: #ff4f81;
-  font-weight: bold;
-  cursor: pointer;
 }
 
 /* ENVELOPE */
 .scene {
-  width: 300px;
-  height: 220px;
+  width: 90vw;
+  max-width: 350px;
+  height: 260px;
   cursor: pointer;
   position: relative;
-  display: none;
 }
 
 .envelope {
-  position: absolute;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .back {
-  position: absolute;
   width: 100%;
   height: 100%;
   background: #ff7aa8;
@@ -69,34 +41,36 @@ body {
 .front {
   position: absolute;
   bottom: 0;
-  border-left: 150px solid #ff5f95;
-  border-right: 150px solid #ff5f95;
-  border-top: 100px solid transparent;
-  border-bottom: 100px solid #ff4f81;
+  width: 0;
+  height: 0;
+  border-left: 50% solid #ff5f95;
+  border-right: 50% solid #ff5f95;
+  border-top: 120px solid transparent;
+  border-bottom: 120px solid #ff4f81;
 }
 
 .flap {
   position: absolute;
-  border-left: 150px solid transparent;
-  border-right: 150px solid transparent;
-  border-top: 100px solid #ff8fb7;
+  width: 0;
+  height: 0;
+  border-left: 50% solid transparent;
+  border-right: 50% solid transparent;
+  border-top: 120px solid #ff8fb7;
   transform-origin: top;
   transition: 1s;
 }
 
 .letter {
   position: absolute;
-  width: 260px;
-  height: 160px;
-  background: white;
-  border-radius: 15px;
+  width: 90%;
   left: 50%;
   transform: translateX(-50%);
   bottom: 10px;
+  background: white;
+  border-radius: 15px;
   padding: 15px;
   text-align: center;
   transition: 1s;
-  overflow: hidden;
 }
 
 .letter img {
@@ -108,7 +82,7 @@ body {
 .full {
   opacity: 0;
   transition: 1s;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .open .flap {
@@ -116,8 +90,7 @@ body {
 }
 
 .open .letter {
-  transform: translateX(-50%) translateY(-120px);
-  height: 320px;
+  transform: translateX(-50%) translateY(-140px);
 }
 
 .open .full {
@@ -126,7 +99,7 @@ body {
 
 .name {
   position: absolute;
-  top: 90px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
   background: white;
@@ -135,19 +108,51 @@ body {
   color: #ff4f81;
   font-weight: bold;
 }
+
+/* QUESTION POPUP */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.yes {
+  background: #ff4f81;
+  color: white;
+}
+
+.no {
+  background: grey;
+  color: white;
+  position: relative;
+}
 </style>
 </head>
+
 <body>
 
-<!-- INTRO SCREEN -->
-<div class="intro" id="intro">
-  <h2>Hey Meeca 🥺💖</h2>
-  <p>I made something for you…</p>
-  <button onclick="start()">Open it 💌</button>
-</div>
-
-<!-- ENVELOPE -->
-<div class="scene" id="scene" onclick="toggle()">
+<div class="scene" onclick="openLetter()">
   <div class="envelope" id="env">
     <div class="back"></div>
 
@@ -168,15 +173,37 @@ body {
   </div>
 </div>
 
+<!-- QUESTION -->
+<div class="popup" id="popup">
+  <div class="box">
+    <h3>Will you be mine forever? 💖</h3>
+    <button class="yes" onclick="yes()">YES 😍</button>
+    <button class="no" id="noBtn">NO 😈</button>
+  </div>
+</div>
+
 <script>
-function start() {
-  document.getElementById("intro").style.display = "none";
-  document.getElementById("scene").style.display = "block";
+function openLetter() {
+  document.getElementById("env").classList.add("open");
+
+  setTimeout(() => {
+    document.getElementById("popup").style.display = "flex";
+  }, 2000);
 }
 
-function toggle() {
-  document.getElementById("env").classList.toggle("open");
+// YES BUTTON
+function yes() {
+  alert("I knew it 😘💖");
 }
+
+// NO BUTTON RUNS AWAY
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 200 - 100;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
 </script>
 
 </body>
