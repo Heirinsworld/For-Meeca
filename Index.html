@@ -212,10 +212,18 @@ function showPopup(e) {
   document.getElementById("popup").style.display = "flex";
 }
 
+// ✅ UPDATED YES FUNCTION WITH YOUR NUMBER
 function yes() {
-  alert("I knew it 😘💖");
+  window.open("https://wa.me/27679360501?text=Yes, I will be yours forever ❤️🥺", "_blank");
+
+  document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;text-align:center;font-family:Arial;background:#ffd9e8;">
+      <h1>I love you so much 😘💖</h1>
+    </div>
+  `;
 }
 
+// 😈 NO BUTTON RUNS AWAY
 const noBtn = document.getElementById("noBtn");
 
 noBtn.addEventListener("mouseover", () => {
