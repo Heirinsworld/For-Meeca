@@ -60,6 +60,7 @@ body {
   transition: 1s;
 }
 
+/* LETTER */
 .letter {
   position: absolute;
   width: 90%;
@@ -85,6 +86,7 @@ body {
   font-size: 15px;
 }
 
+/* OPEN */
 .open .flap {
   transform: rotateX(180deg);
 }
@@ -109,7 +111,18 @@ body {
   font-weight: bold;
 }
 
-/* QUESTION POPUP */
+/* BUTTON */
+.continue-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: #ff4f81;
+  color: white;
+  cursor: pointer;
+}
+
+/* POPUP */
 .popup {
   position: fixed;
   top: 0;
@@ -154,6 +167,7 @@ button {
 
 <div class="scene" onclick="openLetter()">
   <div class="envelope" id="env">
+    
     <div class="back"></div>
 
     <div class="letter">
@@ -164,16 +178,22 @@ button {
         I’m so glad I chose you, <b>Jermeeca Wildschut</b> 💖<br><br>
         And I’d choose you again… every single time.<br><br>
         — Love, Heirin George 😘
+        
+        <br><br>
+        <button class="continue-btn" onclick="showPopup(event)">
+          Continue 💖
+        </button>
       </div>
     </div>
 
     <div class="flap"></div>
     <div class="front"></div>
     <div class="name">Meeca 💕</div>
+
   </div>
 </div>
 
-<!-- QUESTION -->
+<!-- POPUP -->
 <div class="popup" id="popup">
   <div class="box">
     <h3>Will you be mine forever? 💖</h3>
@@ -185,18 +205,17 @@ button {
 <script>
 function openLetter() {
   document.getElementById("env").classList.add("open");
-
-  setTimeout(() => {
-    document.getElementById("popup").style.display = "flex";
-  }, 2000);
 }
 
-// YES BUTTON
+function showPopup(e) {
+  e.stopPropagation();
+  document.getElementById("popup").style.display = "flex";
+}
+
 function yes() {
   alert("I knew it 😘💖");
 }
 
-// NO BUTTON RUNS AWAY
 const noBtn = document.getElementById("noBtn");
 
 noBtn.addEventListener("mouseover", () => {
